@@ -1,9 +1,9 @@
 puzzle= [ '1','2','3',
-          '4','5','6',
-          '7','8',' ',]
+          '4','5',' ',
+          '7','8','6',]
 is_game_over = False
-position = []
-input_key = ['a','s','d','w']
+position = [0]
+
 
 # display game board
 def game_board():
@@ -13,7 +13,9 @@ def game_board():
 
 # check for winning
 def check():
+    #global is_game_over
     if puzzle == ['1','2','3','4','5','6','7','8',' ']:
+        print('checking')
         return is_game_over == True
     else: 
         return is_game_over == False
@@ -23,54 +25,56 @@ def find_position():
     global position
     for i in puzzle:
         if i == ' ':
-            return position.append(puzzle.index(i))
+            position.pop(0)
+            position.append(puzzle.index(i))
 
-# Change position
-def change_position():
-    key = input('left = a, right = d, up = w, down = s: ')
-    valid = False
-    while not valid:
-        
-        while key not in input_key:
-            key = input('left = a, right = d, up = w, down = s: ')
-            if position == 0 and key == 'a' or key == 'w':
-                print('you cannot move that way')
-            elif position == 1 and key == 'w':
-                print('you cannot move that way')
-            elif position == 2 and key == 'w' or key == 'd':
-                print('you cannot move that way')
-            elif position == 3 and key == 'a':
-                print('you cannot move that way')
-            elif position == 5 and key == 'd':
-                print('you cannot move that way')
-            elif position == 6 and key == 'a' or key == 's':
-                print('you cannot move that way')
-            elif position == 7 and key == 's':
-                print('you cannot move that way')
-            elif position == 8 and key == 's' or key == 'd':
-                print('you cannot move that way')
-            else:
-                valid = True
-            
-    
-    
+
 
 
 # Move left
 def move_left():
-    if input_key == 'a' and position not in [0,3,6]:
-        if position == 1:
-            puzzle[position-1], puzzle[position] = puzzle[position], puzzle[position-1]
-        elif position == 2:
-            puzzle[position-1],puzzle[position] = puzzle[position], puzzle[position-1]
-        elif position == 4:
-            puzzle[position-1],puzzle[position] = puzzle[position], puzzle[position-1]
-        elif position == 5:
-            puzzle[position-1],puzzle[position] = puzzle[position], puzzle[position-1]
-        elif position == 7:
-            puzzle[position-1],puzzle[position] = puzzle[position], puzzle[position-1]
-        elif position == 8:
-            puzzle[position-1],puzzle[position] = puzzle[position], puzzle[position-1]
+    if position not in [0,3,6]:
+        puzzle[position[0]], puzzle[position[0]-1] = puzzle[position[0]-1] , puzzle[position[0]]
+       
+        
+
+# Move right
+def move_right():
+    if position not in [2,5,8]:
+        puzzle[position[0]], puzzle[position[0]+1] = puzzle[position[0]+1] , puzzle[position[0]]
+       
+
+# Move up
+def move_up():
+    if position not in [0,1,2]:
+        puzzle[position[0]], puzzle[position[0]-3] = puzzle[position[0]-3] , puzzle[position[0]]
+        
+
+# Move down
+def move_down():
+    if position not in [6,7,8]:
+        puzzle[position[0]], puzzle[position[0]+3] = puzzle[position[0]+3] , puzzle[position[0]]
+        
+
+
+              
+        
+        
+    
+
+# Change position
+def change_position():
+    key = input('left = a, right = d, up = w, down = s: ')
+    if key == 'a':
+        move_left()
+    elif key == 'd':
+        move_right()
+    elif key == 'w':
+        move_up()
+    elif key == 's':
+        move_down()    
+    else:
+        key = input('left = a, right = d, up = w, down = s: ')
 
 
 # Play game
