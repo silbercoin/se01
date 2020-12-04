@@ -47,13 +47,6 @@ def move_up():
 def move_down():
     if position not in [6,7,8]:
         puzzle[position[0]], puzzle[position[0]+3] = puzzle[position[0]+3] , puzzle[position[0]]
-        
-
-
-              
-        
-        
-    
 
 # Change position
 def change_position():
@@ -89,3 +82,11 @@ play_game()
 
 
 
+        
+'''
+When I got this question, I was thinking how to approch to solve this question. 
+First, it needed a board. so I decided to make a board with list. After that I was thinking about how to finish this game. In order to finish the game, the puzzle has to be in the order. so I made a function that checking the puzzle list is matching the result list. make a finding the empty value list function so that I can limit the movement by a 3X3 board. 
+
+After that I was looking into how to move the list. basically, I wanted to swap the list index value. Also, I was thinking about limitation of movement. however, I was stuck in how to swap the list value and fillter out input key part. if I had more time, I could finish this question. 
+
+I realized that I didn't sturucture well before start the coding and when I get time pressure I couldn't think that much..   
